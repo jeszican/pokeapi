@@ -106,5 +106,7 @@ This document is intended to provide an overview of the process i went through t
 
     c) If I have time, I will create some unit tests also.
 
-7) Integration tests are done, added some extra information, generated some mocks and tried to refine the regeneration of openapi workflow but failed. :) 
+7) Integration tests are done, added some extra information, generated some mocks and tried to refine the regeneration of openapi workflow but failed. :)
+
+8) & at 3:XX hours in I've stopped 
 

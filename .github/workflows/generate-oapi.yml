@@ -20,13 +20,9 @@ jobs:
           go-version-file: "go.mod"
       - name: install-oapi-codegen
         run: make oapi-codegen-install
-      - name: set-up-diff-test
-        run: |-
-          mkdir tmp
-          cp docs/openapi.yaml tmp/openapi.yaml
       - name: generate-the-client
         run: make oapi-codegen-generate
-      - name: create-pull-request
+      - name: push-to-main
         run: |-
           git config --global user.email "jessicanatashamail@gmail.com"
           git config --global user.name "oapi-codegen"
