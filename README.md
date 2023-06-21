@@ -1,5 +1,19 @@
 ## How to use this SDK
+### Installation
 
+To use this SDK in your go code, go get it.
+`go get github.com/jeszican/pokeapi/client `
+
+You can then instantiate the client like this:
+```golang
+    import (
+        "github.com/jeszican/pokeapi/client"
+    )
+    const (
+	    SERVER_URL = "https://pokeapi.co/api/v2"
+    )
+	cli, err := client.NewClientWithResponses(SERVER_URL)
+```
 
 ---
 ## The Process
