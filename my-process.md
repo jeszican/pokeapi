@@ -1,3 +1,8 @@
+## How to use this SDK
+
+
+---
+## The Process
 ### Introduction
 
 This document is intended to provide an overview of the process i went through to generate the sdk for [pokeapi](https://pokeapi.co/).
@@ -24,13 +29,21 @@ This document is intended to provide an overview of the process i went through t
     - `/nature/{id}`
     - `/stat/{id}`
 
-    b. I now had 3 seperate specs from ChatGPT so I combined them together into one, added a description, url and made some tweaks, (see file `openapi.yaml`):
+    b. I now had 3 seperate specs from ChatGPT so I combined them together into     one, added a description, url and made some tweaks, (see file `openapi.yaml`):
 
 4) Next I generated the api using the following package and command:
 
     - https://github.com/deepmap/oapi-codegen
     - `oapi-codegen -package client openapi.yaml > client/client.gen.go`
 
+5) After this I decided to try and create a github action that regenerated my client based on changes and pushed to main. _I don't have experience creating github actions so thought this might be fun._
 
+6) Now I am going to start on the integration tests, my plan is to:
+
+    a) Create a go binary that will import the client, and use it.
+
+    b) Create a github action that will run the go binary and fail/succeed.
+
+    c) If I have time, I will create some unit tests also.
 
 
