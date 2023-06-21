@@ -4,7 +4,7 @@
 To use this SDK in your go code, go get it.
 `go get github.com/jeszican/pokeapi/client `
 
-You can then instantiate the client like this:
+You can then instantiate the client & call the functions like this:
 ```golang
     import (
         "github.com/jeszican/pokeapi/client"
@@ -13,6 +13,9 @@ You can then instantiate the client like this:
 	    SERVER_URL = "https://pokeapi.co/api/v2"
     )
     cli, err := client.NewClientWithResponses(SERVER_URL)
+    response, err := cli.GetPokemonDetailsWithResponse(ctx, idPathParam)
+    // check the err
+    // the response.JSON200 is a *client.PokemonDetails
 ```
 
 ### Documentation
