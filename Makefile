@@ -4,4 +4,4 @@ oapi-codegen-install:
 	@oapi-codegen -version
 
 oapi-codegen-generate:
-	@oapi-codegen -package pokeapi openapi.yaml > client/client.gen.go
+	@oapi-codegen -package client openapi.yaml > client/client.gen.go
