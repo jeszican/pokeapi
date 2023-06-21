@@ -43,7 +43,7 @@ This document is intended to provide an overview of the process i went through t
     - `/nature/{id}`
     - `/stat/{id}`
 
-    b. I now had 3 seperate specs from ChatGPT so I combined them together into     one, added a description, url and made some tweaks, (see file `openapi.yaml`):
+    b. I now had 3 seperate specs from ChatGPT so I combined them together into     one, added a description, url and made some tweaks, (see file `docs/openapi.yaml`):
 
 4) Next I generated the api using the following package and command:
 

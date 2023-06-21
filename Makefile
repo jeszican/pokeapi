@@ -4,7 +4,7 @@ oapi-codegen-install:
 	@oapi-codegen -version
 
 oapi-codegen-generate:
-	@oapi-codegen -package client openapi.yaml > client/client.gen.go
+	@oapi-codegen -package client docs/openapi.yaml > client/client.gen.go
 
 integration-tests:
 	go run main.go
