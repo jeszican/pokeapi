@@ -445,10 +445,10 @@ components:
           example: hardy
         decreased_stat:
           $ref: "#/components/schemas/Stat"
-          description: The stat that is decreased by the nature.
+          description: The stat that is decreased by this nature.
         increased_stat:
           $ref: "#/components/schemas/Stat"
-          description: The stat that is increased by the nature.
+          description: The stat that is increased by this nature.
         hates_flavor:
           $ref: "#/components/schemas/Flavor"
           description: The flavor that the nature hates.
@@ -465,7 +465,7 @@ components:
                 description: The maximum amount of change in the Pokeathlon stat.
               pokeathlon_stat:
                 $ref: "#/components/schemas/PokeathlonStat"
-                description: The Pokeathlon stat affected by the nature.
+                description: The Pokeathlon stat affected by this nature.
             required:
               - max_change
               - pokeathlon_stat
