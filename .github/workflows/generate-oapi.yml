@@ -28,7 +28,7 @@ jobs:
         run: make oapi-codegen-generate
       - name: run-diff-test
         run: |-
-          diff openapi.yaml tmp/openapi.yaml
+          diff docs/openapi.yaml tmp/openapi.yaml
           retVal=$?
           if [ $retVal -ne 0 ]; then
             # if diff doesn't return 0, error

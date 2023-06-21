@@ -15,6 +15,10 @@ You can then instantiate the client like this:
 	cli, err := client.NewClientWithResponses(SERVER_URL)
 ```
 
+### Documentation
+
+You can view the openapi specification for this API (here)[https://jeszican.github.io/pokeapi/].
+
 ---
 ## The Process
 ### Introduction
