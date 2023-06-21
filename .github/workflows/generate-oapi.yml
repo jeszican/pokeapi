@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+env:
+  GO_GEN_CLIENT_FILE: client/client.go
+  TMP_DIFF_DIR: diff-test-tmp
+  OPENAPI_GEN_FILE: openapi.yaml
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.number }}
+      - uses: actions/setup-go@v3
+        with:
+          go-version-file: 'go.mod'
+      - name: install oapi codegen
+        run: make oapi-codegen-install
+      - name: generate the client
+        run: make oapi-codegen-generate
+      - name: create pull request
+        run: |- 
+          git add ${{ env.GO_GEN_CLIENT_FILE }}  
+          git commit -m "chore: automated update of client code"
+          git push
+        
