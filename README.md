@@ -108,5 +108,16 @@ This document is intended to provide an overview of the process i went through t
 
 7) Integration tests are done, added some extra information, generated some mocks and tried to refine the regeneration of openapi workflow but failed. :)
 
-8) & at 3:XX hours in I've stopped 
+8) & at about 4 hours in I've stopped. Things I would like to improve with more time include:
+
+    a) I'd like to combine the functions that run the tests into one by interfacing the response types.
+
+    b) I would like to change the generate-oapi workflow to only generate if the openapi spec has changed.
+
+    c) I'd like to add some unit testing.
+
+    d) I think I could add more integration tests and spend more time on the required fields.
+    
+
+
 
