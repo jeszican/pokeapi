@@ -3,8 +3,6 @@ name: CI
 on:
   push:
     branches: ["main"]
-  pull_request:
-    branches: ["main"]
 
   workflow_dispatch:
 
@@ -18,8 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.number }}
       - uses: actions/setup-go@v3
         with:
           go-version-file: "go.mod"
@@ -29,6 +25,8 @@ jobs:
         run: make oapi-codegen-generate
       - name: create pull request
         run: |-
+          git config --global user.email "jessicanatashamail@gmail.com"
+          git config --global user.name "oapi-codegen"
           git add ${{ env.GO_GEN_CLIENT_FILE }}  
           git commit -m "chore: automated update of client code"
           git push
