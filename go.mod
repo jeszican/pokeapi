@@ -1,4 +1,4 @@
-module github.com/jeszican/pokeapi.git
+module github.com/jeszican/pokeapi
 
 go 1.20
 

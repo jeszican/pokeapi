@@ -68,7 +68,7 @@ components:
       in: path
       required: true
       schema:
-        type: integer
+        type: string
       description: The ID of the resource.
   schemas:
     Ability:
