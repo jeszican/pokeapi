@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: ["main"]
+
+  workflow_dispatch:
+
+env:
+  GO_GEN_CLIENT_FILE: client/client.gen.go
+  TMP_DIFF_DIR: diff-test-tmp
+  OPENAPI_GEN_FILE: openapi.yaml
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version-file: "go.mod"
+      - name: run integration test
+        run: make integration-test
