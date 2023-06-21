@@ -117,7 +117,9 @@ This document is intended to provide an overview of the process i went through t
     c) I'd like to add some unit testing.
 
     d) I think I could add more integration tests and spend more time on the required fields.
-    
+
+    e) I'd like to add some HTML documentation for the functions.
+
 
 
 
