@@ -19,6 +19,48 @@ You can then instantiate the client like this:
 
 You can view the openapi specification for this API [here](https://jeszican.github.io/pokeapi/).
 
+### Testing
+
+You can use the generated mock in the mocks/ folder for testing this API client. You can use it like:
+
+```golang
+package mocks
+
+import (
+	"context"
+	"net/http"
+	"testing"
+
+	"github.com/golang/mock/gomock"
+	client "github.com/jeszican/pokeapi/client"
+	v4 "github.com/labstack/echo/v4"
+	"github.com/stretchr/testify/assert"
+)
+
+func TestMockClientInterface_GetNatureDetails(t *testing.T) {
+    var natureId = "x"
+    
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	mockClient := NewMockClientInterface(ctrl)
+	ctx := context.TODO()
+	id := client.IdPathParam(natureId)
+
+	expectedResponse := &http.Response{}
+	expectedError := assert.AnError
+
+	mockClient.EXPECT().
+		GetNatureDetails(ctx, id).
+		Return(expectedResponse, expectedError)
+
+	response, err := mockClient.GetNatureDetails(ctx, id)
+
+	assert.Equal(t, expectedResponse, response)
+	assert.Equal(t, expectedError, err)
+}
+```
+
 ---
 ## The Process
 ### Introduction
