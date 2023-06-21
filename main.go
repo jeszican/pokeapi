@@ -126,7 +126,7 @@ var (
 				"2",
 				"5",
 			},
-			wantErr:        true,
+			wantErr:        false,
 			wantStatusCode: http.StatusOK,
 		},
 		{
