@@ -26,20 +26,7 @@ jobs:
           cp docs/openapi.yaml tmp/openapi.yaml
       - name: generate-the-client
         run: make oapi-codegen-generate
-      - name: run-diff-test
-        run: |-
-          diff docs/openapi.yaml tmp/openapi.yaml
-          retVal=$?
-          if [ $retVal -ne 0 ]; then
-            # if diff doesn't return 0, error
-            exit 2
-          fi
-      - name: check-on-failures
-        # if no changes, just exit
-        if: steps.run-diff-test.outcome != 'success'
-        run: exit 0
       - name: create-pull-request
-        if: steps.run-diff-test.outcome == 'success'
         run: |-
           git config --global user.email "jessicanatashamail@gmail.com"
           git config --global user.name "oapi-codegen"
