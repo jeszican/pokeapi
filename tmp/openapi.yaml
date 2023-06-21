@@ -1,0 +1,702 @@
+openapi: 3.0.0
+info:
+  title: PokeAPI
+  version: 1.0.0
+  description: |
+    This is an OpenAPI specification for PokeAPI.
+servers:
+  - url: https://pokeapi.co/api/v2
+paths:
+  /pokemon/{id}/:
+    parameters:
+      - $ref: "#/components/parameters/IdPathParam"
+    get:
+      tags:
+        - Pokemon
+      summary: Get Pokemon Details by ID or Name
+      description: Retrieves detailed information about a specific Pokemon based on its ID or Name.
+      operationId: getPokemonDetails
+      responses:
+        "200":
+          description: Successful response with the Pokemon details.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PokemonDetails"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /nature/{id}:
+    parameters:
+      - $ref: "#/components/parameters/IdPathParam"
+    get:
+      tags:
+        - Nature
+      summary: Get Nature Details by ID
+      description: Retrieves detailed information about a specific nature based on its ID.
+      operationId: getNatureDetails
+      responses:
+        "200":
+          description: Successful response with the Nature details.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NatureDetails"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /stat/{id}:
+    parameters:
+      - $ref: "#/components/parameters/IdPathParam"
+    get:
+      tags:
+        - Stat
+      summary: Get Stat Details
+      description: Retrieves detailed information about a stat.
+      operationId: getStatDetails
+      responses:
+        "200":
+          description: Successful response with the Stat details.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatDetails"
+        "404":
+          $ref: "#/components/responses/NotFound"
+components:
+  parameters:
+    IdPathParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The ID of the resource.
+  schemas:
+    Ability:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the ability.
+        url:
+          type: string
+          format: url
+          description: The URL of the ability's details.
+      example:
+        name: overgrow
+        url: https://pokeapi.co/api/v2/ability/65/
+    Type:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the Pokemon type.
+        url:
+          type: string
+          format: url
+          description: The URL of the type's details.
+      example:
+        name: grass
+        url: https://pokeapi.co/api/v2/type/12/
+    Generation:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the generation.
+        url:
+          type: string
+          format: url
+          description: The URL of the generation's details.
+      example:
+        name: generation-v
+        url: https://pokeapi.co/api/v2/generation/5/
+    Version:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the version.
+        url:
+          type: string
+          format: url
+          description: The URL of the version's details.
+      example:
+        name: red
+        url: https://pokeapi.co/api/v2/version/1/
+    MoveLearnMethod:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the move learn method.
+        url:
+          type: string
+          format: url
+          description: The URL of the move learn method's details.
+      example:
+        name: egg
+        url: https://pokeapi.co/api/v2/move-learn-method/2/
+    VersionGroup:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the version group.
+        url:
+          type: string
+          format: url
+          description: The URL of the version group's details.
+      example:
+        name: gold-silver
+        url: https://pokeapi.co/api/v2/version-group/3/
+    Stat:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the stat.
+        url:
+          type: string
+          format: url
+          description: The URL of the stat's details.
+      example:
+        name: defense
+        url: https://pokeapi.co/api/v2/stat/1/
+    PokemonForm:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the Pokemon form.
+        url:
+          type: string
+          format: url
+          description: The URL of the Pokemon form's details.
+      example:
+        name: bulbasaur
+        url: https://pokeapi.co/api/v2/pokemon-form/1/
+    SpriteImages:
+      type: object
+      properties:
+        back_default:
+          type: string
+          format: url
+          description: The URL of the default back sprite image.
+        back_female:
+          type: string
+          format: url
+          description: The URL of the female back sprite image.
+        back_shiny:
+          type: string
+          format: url
+          description: The URL of the shiny back sprite image.
+        back_shiny_female:
+          type: string
+          format: url
+          description: The URL of the shiny female back sprite image.
+        front_default:
+          type: string
+          format: url
+          description: The URL of the default front sprite image.
+        front_female:
+          type: string
+          format: url
+          description: The URL of the female front sprite image.
+        front_shiny:
+          type: string
+          format: url
+          description: The URL of the shiny front sprite image.
+        front_shiny_female:
+          type: string
+          format: url
+          description: The URL of the shiny female front sprite image.
+        other:
+          type: object
+          properties:
+            dream_world:
+              type: object
+              properties:
+                front_default:
+                  type: string
+                  format: url
+                  description: The URL of the dream world front sprite image.
+                front_female:
+                  type: string
+                  format: url
+                  description: The URL of the dream world female front sprite image.
+              required:
+                - front_default
+              example:
+                front_default: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg
+                front_female: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/female/1.svg
+            home:
+              type: object
+              properties:
+                front_default:
+                  type: string
+                  format: url
+                  description: The URL of the home front sprite image.
+                front_female:
+                  type: string
+                  format: url
+                  description: The URL of the home female front sprite image.
+                front_shiny:
+                  type: string
+                  format: url
+                  description: The URL of the shiny home front sprite image.
+                front_shiny_female:
+                  type: string
+                  format: url
+                  description: The URL of the shiny home female front sprite image.
+              required:
+                - front_default
+              example:
+                front_default: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png
+                front_female: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/female/1.png
+                front_shiny: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/1.png
+                front_shiny_female: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/female/1.png
+            official_artwork:
+              type: object
+              properties:
+                front_default:
+                  type: string
+                  format: url
+                  description: The URL of the official artwork front sprite image.
+                front_shiny:
+                  type: string
+                  format: url
+                  description: The URL of the shiny official artwork front sprite image.
+              required:
+                - front_default
+              example:
+                front_default: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png
+                front_shiny: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png
+          required:
+            - dream_world
+            - home
+            - official_artwork
+      required:
+        - front_default
+    PokemonDetails:
+      type: object
+      properties:
+        abilities:
+          type: array
+          items:
+            type: object
+            properties:
+              ability:
+                $ref: "#/components/schemas/Ability"
+              is_hidden:
+                type: boolean
+                description: Indicates if the ability is hidden.
+              slot:
+                type: integer
+                description: The slot number of the ability.
+          description: The abilities of the Pokemon.
+        base_experience:
+          type: integer
+          description: The base experience gained when defeating the Pokemon.
+        height:
+          type: integer
+          description: The height of the Pokemon in decimetres.
+        id:
+          type: integer
+          description: The ID of the Pokemon.
+        is_default:
+          type: boolean
+          description: Indicates if the Pokemon is the default form.
+        location_area_encounters:
+          type: string
+          format: url
+          description: The URL for accessing the Pokemon's location area encounters.
+        name:
+          type: string
+          description: The name of the Pokemon.
+        order:
+          type: integer
+          description: The order of the Pokemon.
+        past_types:
+          type: array
+          items:
+            type: object
+            properties:
+              generation:
+                $ref: "#/components/schemas/Generation"
+              types:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    slot:
+                      type: integer
+                      description: The slot number of the type.
+                    type:
+                      $ref: "#/components/schemas/Type"
+            required:
+              - generation
+              - types
+          description: The past types of the Pokemon.
+        forms:
+          type: array
+          items:
+            $ref: "#/components/schemas/PokemonForm"
+          description: The forms of the Pokemon.
+        game_indices:
+          type: array
+          items:
+            type: object
+            properties:
+              game_index:
+                type: integer
+                description: The game index of the Pokemon.
+              version:
+                $ref: "#/components/schemas/Version"
+            required:
+              - game_index
+              - version
+          description: The game indices of the Pokemon.
+        moves:
+          type: array
+          items:
+            type: object
+            properties:
+              move:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: The name of the move.
+                  url:
+                    type: string
+                    format: url
+                    description: The URL of the move's details.
+                required:
+                  - name
+                  - url
+              version_group_details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    level_learned_at:
+                      type: integer
+                      description: The level at which the move is learned.
+                    move_learn_method:
+                      $ref: "#/components/schemas/MoveLearnMethod"
+                    version_group:
+                      $ref: "#/components/schemas/VersionGroup"
+                  required:
+                    - level_learned_at
+                    - move_learn_method
+                    - version_group
+            required:
+              - move
+              - version_group_details
+          description: The moves of the Pokemon.
+        sprites:
+          $ref: "#/components/schemas/SpriteImages"
+          description: The sprite images of the Pokemon.
+        stats:
+          type: array
+          items:
+            type: object
+            properties:
+              base_stat:
+                type: integer
+                description: The base stat value.
+              effort:
+                type: integer
+                description: The effort points gained when defeating the Pokemon.
+              stat:
+                $ref: "#/components/schemas/Stat"
+            required:
+              - base_stat
+              - effort
+              - stat
+          description: The stats of the Pokemon.
+        types:
+          type: array
+          items:
+            type: object
+            properties:
+              slot:
+                type: integer
+                description: The slot number of the type.
+              type:
+                $ref: "#/components/schemas/Type"
+            required:
+              - slot
+              - type
+          description: The types of the Pokemon.
+        weight:
+          type: integer
+          description: The weight of the Pokemon in hectograms.
+    NatureDetails:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the nature.
+          example: 1
+        name:
+          type: string
+          description: The name of the nature.
+          example: hardy
+        decreased_stat:
+          $ref: "#/components/schemas/Stat"
+          description: The stat that is decreased by this nature.
+        increased_stat:
+          $ref: "#/components/schemas/Stat"
+          description: The stat that is increased by this nature.
+        hates_flavor:
+          $ref: "#/components/schemas/Flavor"
+          description: The flavor that the nature hates.
+        likes_flavor:
+          $ref: "#/components/schemas/Flavor"
+          description: The flavor that the nature likes.
+        pokeathlon_stat_changes:
+          type: array
+          items:
+            type: object
+            properties:
+              max_change:
+                type: integer
+                description: The maximum amount of change in the Pokeathlon stat.
+              pokeathlon_stat:
+                $ref: "#/components/schemas/PokeathlonStat"
+                description: The Pokeathlon stat affected by this nature.
+            required:
+              - max_change
+              - pokeathlon_stat
+          description: The changes in Pokeathlon stats caused by the nature.
+        move_battle_style_preferences:
+          type: array
+          items:
+            type: object
+            properties:
+              low_hp_preference:
+                type: integer
+                description: The preference for a move under low HP conditions.
+              high_hp_preference:
+                type: integer
+                description: The preference for a move under high HP conditions.
+              move_battle_style:
+                $ref: "#/components/schemas/MoveBattleStyle"
+                description: The move battle style affected by the nature.
+            required:
+              - low_hp_preference
+              - high_hp_preference
+              - move_battle_style
+          description: The move battle style preferences influenced by the nature.
+      required:
+        - id
+        - name
+        - decreased_stat
+        - increased_stat
+        - hates_flavor
+        - likes_flavor
+        - pokeathlon_stat_changes
+        - move_battle_style_preferences
+    Flavor:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the flavor.
+          example: Spicy
+        url:
+          type: string
+          format: url
+          description: The URL of the flavor's details.
+          example: https://pokeapi.co/api/v2/berry-flavor/1/
+    PokeathlonStat:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the Pokeathlon stat.
+          example: speed
+        url:
+          type: string
+          format: url
+          description: The URL of the Pokeathlon stat's details.
+          example: https://pokeapi.co/api/v2/pokeathlon-stat/1/
+    MoveBattleStyle:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the move battle style.
+          example: attack
+        url:
+          type: string
+          format: url
+          description: The URL of the move battle style's details.
+          example: https://pokeapi.co/api/v2/move-battle-style/1/
+    StatDetails:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the stat.
+          example: 1
+        name:
+          type: string
+          description: The name of the stat.
+          example: hp
+        game_index:
+          type: integer
+          description: The game index of the stat.
+          example: 1
+        is_battle_only:
+          type: boolean
+          description: Indicates if the stat is only used in battles.
+          example: false
+        affecting_moves:
+          $ref: "#/components/schemas/StatAffectingMoves"
+          description: The moves that affect the stat.
+        affecting_natures:
+          $ref: "#/components/schemas/StatAffectingNatures"
+          description: The natures that affect the stat.
+        characteristics:
+          type: array
+          items:
+            $ref: "#/components/schemas/Characteristic"
+          description: The characteristics related to the stat.
+        move_damage_class:
+          $ref: "#/components/schemas/MoveDamageClass"
+          description: The move damage class associated with the stat.
+      required:
+        - id
+        - name
+        - game_index
+        - is_battle_only
+        - affecting_moves
+        - affecting_natures
+        - characteristics
+        - move_damage_class
+    StatAffectingMoves:
+      type: object
+      properties:
+        increase:
+          type: array
+          items:
+            $ref: "#/components/schemas/AffectingMove"
+          description: The moves that increase the stat.
+          example:
+            change: 1
+            nature:
+              name: bold
+              url: "https://pokeapi.co/api/v2/nature/2/"
+        decrease:
+          type: array
+          items:
+            $ref: "#/components/schemas/AffectingMove"
+          description: The moves that decrease the stat.
+          example:
+            change: -1
+            nature:
+              name: sassy
+              url: "https://pokeapi.co/api/v2/nature/24/"
+      required:
+        - increase
+        - decrease
+    StatAffectingNatures:
+      type: object
+      properties:
+        increase:
+          type: array
+          items:
+            $ref: "#/components/schemas/AffectingNature"
+          description: The natures that increase the stat.
+          example:
+            change: 1
+            nature:
+              name: bold
+              url: "https://pokeapi.co/api/v2/nature/2/"
+        decrease:
+          type: array
+          items:
+            $ref: "#/components/schemas/AffectingNature"
+          description: The natures that decrease the stat.
+          example:
+            change: -1
+            nature:
+              name: sassy
+              url: "https://pokeapi.co/api/v2/nature/24/"
+      required:
+        - increase
+        - decrease
+    AffectingMove:
+      type: object
+      properties:
+        change:
+          type: integer
+          description: The change in the stat caused by the move.
+          example: -1
+        move:
+          $ref: "#/components/schemas/Move"
+          description: The move that affects the stat.
+      required:
+        - change
+        - move
+    AffectingNature:
+      type: object
+      properties:
+        change:
+          type: integer
+          description: The change in the stat caused by the nature.
+        nature:
+          $ref: "#/components/schemas/Nature"
+          description: The nature that affects the stat.
+      required:
+        - change
+        - nature
+    Characteristic:
+      type: object
+      properties:
+        url:
+          type: string
+          format: url
+          description: The URL of the characteristic's details.
+          example: https://pokeapi.co/api/v2/characteristic/1/
+    MoveDamageClass:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the move damage class.
+          example: physical
+        url:
+          type: string
+          format: url
+          description: The URL of the move damage class's details.
+          example: https://pokeapi.co/api/v2/move-damage-class/2/
+    Move:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the move.
+          example: growl
+        url:
+          type: string
+          format: url
+          description: The URL of the move's details.
+          example: https://pokeapi.co/api/v2/move/45/
+    Nature:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the nature.
+          example: sassy
+        url:
+          type: string
+          format: url
+          description: The URL of the nature's details.
+          example: https://pokeapi.co/api/v2/nature/24/
+  responses:
+    NotFound:
+      description: The requested resource was not found.
