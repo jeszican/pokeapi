@@ -17,7 +17,7 @@ You can then instantiate the client like this:
 
 ### Documentation
 
-You can view the openapi specification for this API (here)[https://jeszican.github.io/pokeapi/].
+You can view the openapi specification for this API [here](https://jeszican.github.io/pokeapi/).
 
 ---
 ## The Process
