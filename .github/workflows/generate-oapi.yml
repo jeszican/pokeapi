@@ -22,6 +22,7 @@ jobs:
         run: make oapi-codegen-install
       - name: set-up-diff-test
         run: |-
+          mkdir tmp
           cp openapi.yaml tmp/openapi.yaml
       - name: generate-the-client
         run: make oapi-codegen-generate
