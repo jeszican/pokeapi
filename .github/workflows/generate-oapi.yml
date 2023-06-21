@@ -29,6 +29,11 @@ jobs:
       - name: run-diff-test
         run: |-
           diff openapi.yaml tmp/openapi.yaml
+          retVal=$?
+          if [ $retVal -ne 0 ]; then
+            # if diff doesn't return 0, error
+            exit 2
+          fi
       - name: check-on-failures
         # if no changes, just exit
         if: steps.run-diff-test.outcome != 'success'
