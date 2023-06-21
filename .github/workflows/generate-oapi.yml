@@ -8,7 +8,6 @@ on:
 
 env:
   GO_GEN_CLIENT_FILE: client/client.gen.go
-  TMP_DIFF_DIR: diff-test-tmp
   OPENAPI_GEN_FILE: openapi.yaml
 
 jobs:
@@ -19,11 +18,22 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           go-version-file: "go.mod"
-      - name: install oapi codegen
+      - name: install-oapi-codegen
         run: make oapi-codegen-install
-      - name: generate the client
+      - name: set-up-diff-test
+        run: |-
+          cp openapi.yaml tmp/openapi.yaml
+      - name: generate-the-client
         run: make oapi-codegen-generate
-      - name: create pull request
+      - name: run-diff-test
+        run: |-
+          diff openapi.yaml tmp/openapi.yaml
+      - name: check-on-failures
+        # if no changes, just exit
+        if: steps.run-diff-test.outcome != 'success'
+        run: exit 1
+      - name: create-pull-request
+        if: steps.run-diff-test.outcome == 'success'
         run: |-
           git config --global user.email "jessicanatashamail@gmail.com"
           git config --global user.name "oapi-codegen"
